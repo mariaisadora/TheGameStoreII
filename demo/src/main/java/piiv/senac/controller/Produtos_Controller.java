@@ -43,7 +43,7 @@ public class Produtos_Controller {
     table_Produtos p = new table_Produtos();
 
 
-    ModelAndView mv = new ModelAndView("backoffice-produtos-novo");
+    ModelAndView mv = new ModelAndView("backofficeProdutos");
 
     mv.addObject("produto", p);
 
@@ -134,7 +134,7 @@ public class Produtos_Controller {
     if (imagens != null) imagemProdutoRepository.salvarImagensProduto(id_produto, imagens);
     if (perguntas !=  null && respostas != null) perguntasRespostasProdutoRepository.salvarPerguntasRespostas(id_produto, perguntas, respostas);
 
-    ModelAndView mv = new ModelAndView("redirect:/Backoffice/Produtos");
+    ModelAndView mv = new ModelAndView("redirect:/TelaInicial/Produtos");
 
     return mv;
   }
