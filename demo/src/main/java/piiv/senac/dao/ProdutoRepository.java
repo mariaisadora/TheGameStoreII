@@ -46,9 +46,9 @@ public class ProdutoRepository{
 	        p.setPreco_custo(rs.getDouble("preco_custo"));
 	        p.setPreco_venda(rs.getDouble("preco_venda"));	        
 	        p.setQuantidade(rs.getInt("quantidade"));
-	        p.setEndereco_imagem2(rs.getString("endereco_imagem2"));
-	        p.setEndereco_imagem3(rs.getString("endereco_imagem3"));;
-	        p.setEndereco_imagem(rs.getString("endereco_imagem"));
+	        p.setEndereco_imagem2(rs.getString("endereco_imagem"));
+	        p.setEndereco_imagem3(rs.getString("endereco_imagem2"));;
+	        p.setEndereco_imagem(rs.getString("endereco_imagem3"));
 	        p.setCodigo_produto(rs.getString("codigo_produto"));
 	        produtos.add(p);
 	      }
@@ -60,14 +60,14 @@ public class ProdutoRepository{
 	    return produtos;
 	  }
 
-	  public void inativarProduto(int id) {
+	  public void inativarProduto(int id_produto) {
 	    Connection con = ConnectionBancoDados.obterConexao();
 	    PreparedStatement stmt = null;
 
 	    try {
 	      stmt = con.prepareStatement("update table_produtos set ativo = 0 where id_produto = ?");
 
-	      stmt.setInt(1, id);
+	      stmt.setInt(1, id_produto);
 
 	      stmt.executeUpdate();
 	    } catch (SQLException ex) {

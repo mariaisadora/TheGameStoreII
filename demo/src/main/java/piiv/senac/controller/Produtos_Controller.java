@@ -65,6 +65,7 @@ public class Produtos_Controller {
 
     mv.addObject("produto", p);
     mv.addObject("listaPerguntasRespostas", listaPerguntaResposta);
+    mv.addObject("listaImagens", listaImagens);
 
     return mv;
   }
@@ -87,6 +88,7 @@ public class Produtos_Controller {
     mv.addObject("produto", p);
     
     mv.addObject("listaPerguntasRespostas", listaPerguntaResposta);
+    mv.addObject("listaImagens", listaImagens);
 
     return mv;
   }

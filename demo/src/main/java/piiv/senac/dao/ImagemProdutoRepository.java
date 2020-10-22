@@ -23,7 +23,7 @@ public class ImagemProdutoRepository {
 
 	    try {
 	      for (int i=0 ; i<imagens.length ; i++) {
-	       stmt = con.prepareStatement("update table_produtos set endereco_imagem=" + imagens[i] + ");");
+	       stmt = con.prepareStatement("update table_produtos set endereco_imagem=" + imagens[i] + " where id_produto= " +id_produto+");" );
 	       stmt.executeUpdate();
 	      }
 
@@ -47,7 +47,7 @@ public class ImagemProdutoRepository {
 
 	      while (rs.next()) {
 	        ImagemProd img = new ImagemProd();
-	        img.setId(rs.getInt("id"));
+	        img.setId(rs.getInt("id_produto"));
 	        img.setId_produto(id_produto);
 	        img.setEndereco_imagem(rs.getString("endereco_imagem"));
 	        listaImagens.add(img);

@@ -16,7 +16,7 @@ public class ImagemProd {
 	
 	    @Override
 	    public String toString() {
-		return "ImagemProduto{" + "id=" + id + ", id_produto=" + id_produto + ", endereco_imagem=" + endereco_imagem + '}';
+		return "ImagemProduto{" + "id_produto=" + id_produto + ", id_produto=" + id_produto + ", endereco_imagem=" + endereco_imagem + '}';
 	    }
 
 	}

@@ -54,6 +54,9 @@
         
         
         <br>
+        <div style="text-align: right">
+          <a href="/TelaInicial/Produtos/Novo" class="btn btn-success" >Adicionar Produto</a>
+        </div>
         <table class="table table-borderless">
           <thead class="bg-light">
             <tr>
@@ -80,15 +83,12 @@
               </form>
             </td>
             <td class="text-center">
-              <form action="#" th:action="${'/TelaInicial/Produtos/' + game.id_produto}" th:method="delete">
+             <form action="#" th:action="${'/TelaInicial/Produtos/' + game.id_produto}" th:method="delete">
                 <button class="btn btn-outline-danger btn-sm" type="submit" value="submit">Excluir</button>
               </form>
             </td>
           </tr>
         </table>
-        <div style="text-align: right">
-          <a href="/TelaInicial/Produtos/Novo" class="btn btn-success" >Adicionar Produto</a>
-        </div>
 
       </div>
     </main>
