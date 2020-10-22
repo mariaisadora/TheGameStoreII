@@ -14,7 +14,7 @@ public class table_Pergunta_Resposta {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_perguntaResposta;
-    private int produto_id;
+    private int id_produto;
     private String pergunta;
     private String resposta;
 }

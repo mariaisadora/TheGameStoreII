@@ -60,9 +60,10 @@
 								</ol>
 								<div class="carousel-inner">
 								
-									<div class="carousel-item active img fluid">
-										<img class="d-block w-100"  th:src="${imagem.endereco_imagem}" alt="Firts slide">
-									</div>
+									<div th:each="imagem, iterstat : ${listaImagens}" th:class="${iterstat.index}== 0  ? 'carousel-item active':'carousel-item'">
+                 ' <img th:src="${imagem.endereco_imagem}" class="d-block w-100" style="width: auto; height: 500px;"alt="Imagem do jogo">
+
+               						 </div>
 									<div class="carousel-item img fluid">
 										<img class="d-block w-100" src="/static/Imagens/controle3.jpg" alt="Second slide">
 									</div>

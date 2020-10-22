@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 public class ImagemProd {
 	    
-	    private int id;
+	    private int id_imagem_produto;
 	    private int id_produto;
 	    private String endereco_imagem;
 
 	
 	    @Override
 	    public String toString() {
-		return "ImagemProduto{" + "id_produto=" + id_produto + ", id_produto=" + id_produto + ", endereco_imagem=" + endereco_imagem + '}';
+	    	return "ImagemProd{" + "id_imagem_produto=" + id_imagem_produto + ", id_produto=" + id_produto + ", endereco_imagem=" + endereco_imagem + '}';
 	    }
 
 	}

@@ -15,13 +15,13 @@ public class PerguntaRespostaRepository {
 
 	
 
-	  public void salvarPerguntasRespostas(int produto_id, String[] perguntas, String[] respostas) {
+	  public void salvarPerguntasRespostas(int id_produto, String[] perguntas, String[] respostas) {
 	    Connection con = ConnectionBancoDados.obterConexao();
 	    PreparedStatement stmt = null;
 
 	    try {
 	      for (int i=0 ; i<perguntas.length ; i++) {
-	       stmt = con.prepareStatement("insert into table_Pergunta_Resposta(produto_id, pergunta, resposta) values(" + produto_id + ", '" + perguntas[i] + "', '" + respostas[i] + "');");
+	       stmt = con.prepareStatement("insert into table_Pergunta_Resposta(id_produto, pergunta, resposta) values(" + id_produto + ", '" + perguntas[i] + "', '" + respostas[i] + "');");
 	       stmt.executeUpdate();
 	      }
 
@@ -32,7 +32,7 @@ public class PerguntaRespostaRepository {
 	    }
 	  }
 
-	  public List<table_Pergunta_Resposta> getPergunta_Resposta(int produto_id) {
+	  public List<table_Pergunta_Resposta> getPergunta_Resposta(int id_produto) {
 	    Connection con = ConnectionBancoDados.obterConexao();
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
@@ -40,13 +40,13 @@ public class PerguntaRespostaRepository {
 	    List<table_Pergunta_Resposta> listaPerguntaResposta = new ArrayList<>();
 
 	    try {
-	      stmt = con.prepareStatement("SELECT * FROM table_Pergunta_Resposta where produto_id = " + produto_id);
+	      stmt = con.prepareStatement("SELECT * FROM table_Pergunta_Resposta where id_produto = " + id_produto);
 	      rs = stmt.executeQuery();
 
 	      while (rs.next()) {
 	        table_Pergunta_Resposta pr = new table_Pergunta_Resposta();
 	        pr.setId_perguntaResposta(rs.getInt("id_perguntaResposta"));
-	        pr.setProduto_id(produto_id);
+	        pr.setId_produto(id_produto);
 	        pr.setPergunta(rs.getString("pergunta"));
 	        pr.setResposta(rs.getString("resposta"));
 	        listaPerguntaResposta.add(pr);
@@ -59,14 +59,14 @@ public class PerguntaRespostaRepository {
 	    return listaPerguntaResposta;
 	  }
 
-	  public void deletarPerguntaResposta(int produto_id) {
+	  public void deletarPerguntaResposta(int id_produto) {
 	    Connection con = ConnectionBancoDados.obterConexao();
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
 
 	    try {
-	      stmt = con.prepareStatement("DELETE FROM table_Pergunta_Resposta where produto_id = ?;");
-	      stmt.setInt(1, produto_id);
+	      stmt = con.prepareStatement("DELETE FROM table_Pergunta_Resposta where id_produto = ?;");
+	      stmt.setInt(1, id_produto);
 	      stmt.executeUpdate();
 	    } catch (SQLException ex) {
 	      Logger.getLogger(PerguntaRespostaRepository.class.getName()).log(Level.SEVERE, null, ex);

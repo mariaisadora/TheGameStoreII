@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 	<title>BACKOFFICE Produtos</title>
 	<!--Bootstrap-->
+	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 	<!--Font Awesome-->
@@ -12,6 +13,7 @@
 	<!--Style-->
 	<link rel="stylesheet" type="text/css" href="/static/CSS/estilo.css">
 	<link rel="stylesheet" type="text/css" href="/static/CSS/estiloc.css">
+	<script src="/static/script.js"></script>
 </head>
 	<header>
 		<div class="wrapper">
@@ -51,15 +53,12 @@
 			<h2>Cadastro de Produtos</h2>
 		</div>
     <div class="container">
-      <!--  <form id="cadProdutos" class="well form-horizontal" action="../produtos" method="post" id="contact_form"> -->
 		<form action="#" th:action="@{/TelaInicial/Produtos/Novo}" th:object="${produto}" method='POST'>            
             <fieldset>
 
-                <center>                 
+                <center>
                     <center>
                         <br>
-
-					<input name="id_produto" id="id_produto" type="hidden" value="0">
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Nome Produto: </label>
@@ -152,7 +151,7 @@
                   <!-- Modal body -->
                   <div class="modal-body" style="text-align:left">
                     <label for="text">Insira a URL da imagem:</label>
-            <input type="text" class="form-control" placeholder="https://dropbox..." id="url_imagem">
+            <input type="text" class="form-control" placeholder="https://google.com/img" id="endereco_imagem">
                   </div>
 
                   <!-- Modal footer -->
@@ -169,7 +168,7 @@
           
           <div class="form-group" style="margin-top: 2rem">
 
-            <label for="text">Perguntas & Respostas do produto:</label>
+            <label for="text">Perguntas e Respostas</label>
             <ul class="list-group-flush" id="lista-pr" style="padding-left: 0px">
               
             </ul>
@@ -195,10 +194,10 @@
                   <!-- Modal body -->
                   <div class="modal-body" style="text-align:left">
                     <label for="text">Insira uma pergunta:</label>
-                    <input type="text" class="form-control" placeholder="Este jogo vem com conteúdo extra?" id="pergunta">
+                    <input type="text" class="form-control" placeholder="entrega em sp" id="pergunta">
                     <br>
                     <label for="text">Insira uma resposta:</label>
-                    <input type="text-area" rows="3" class="form-control" placeholder="Sim! Ele vem com a dlc xxx..." id="resposta">
+                    <input type="text-area" rows="3" class="form-control" placeholder="nao" id="resposta">
                   </div>
 
                   <!-- Modal footer -->
@@ -211,11 +210,17 @@
                                 
                             </div>
                         </div>
+                        </div>
                         
                          <div class="form-group">
             <button type="submit" value="submit" class="btn btn-outline-success">Cadastrar</button>
-          
-            <button class="btn btn-outline-info" type="reset" value="Reset">Resetar</button>
+             <button class="btn btn-outline-info" type="reset" value="Reset" onclick="const myNode = document.getElementById('lista-imagens');myNode.innerHTML = ''; const myNode2 = document.getElementById('lista-pr');myNode2.innerHTML = '';">Resetar</button>
+            <button type="button" id="visualizar" class="btn btn-outline-secondary" onclick="visualizarProduto();">Visualizar</button>
+
+</div>
+</form>
+</div>
+	
 </body>
 
 </html>

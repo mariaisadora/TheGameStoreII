@@ -46,9 +46,6 @@ public class ProdutoRepository{
 	        p.setPreco_custo(rs.getDouble("preco_custo"));
 	        p.setPreco_venda(rs.getDouble("preco_venda"));	        
 	        p.setQuantidade(rs.getInt("quantidade"));
-	        p.setEndereco_imagem2(rs.getString("endereco_imagem"));
-	        p.setEndereco_imagem3(rs.getString("endereco_imagem2"));;
-	        p.setEndereco_imagem(rs.getString("endereco_imagem3"));
 	        p.setCodigo_produto(rs.getString("codigo_produto"));
 	        produtos.add(p);
 	      }
@@ -65,7 +62,7 @@ public class ProdutoRepository{
 	    PreparedStatement stmt = null;
 
 	    try {
-	      stmt = con.prepareStatement("update table_produtos set ativo = 0 where id_produto = ?");
+	      stmt = con.prepareStatement("update table_Produtos set ativo = 0 where id_produto = ?");
 
 	      stmt.setInt(1, id_produto);
 
@@ -82,16 +79,13 @@ public class ProdutoRepository{
 	    PreparedStatement stmt = null;
 
 	    try {
-	      stmt = con.prepareStatement("insert into table_produtos (descricao, preco_custo, preco_venda, quantidade, endereco_imagem, endereco_imagem2, endereco_imagem3, codigo_produto) values (?, ?, ?, ?, ?, ?, ?, ?);");
+	      stmt = con.prepareStatement("insert into table_Produtos (descricao, preco_custo, preco_venda, quantidade, codigo_produto) values (?, ?, ?, ?, ?);");
 
 	      stmt.setString(1, p.getDescricao());
 	      stmt.setDouble(2, p.getPreco_custo());
 	      stmt.setDouble(3, p.getPreco_venda());
 	      stmt.setInt(4, p.getQuantidade());
-	      stmt.setString(5, p.getEndereco_imagem2());
-	      stmt.setString(6, p.getEndereco_imagem3());
-	      stmt.setString(7, p.getEndereco_imagem());
-	      stmt.setString(8, p.getCodigo_produto());
+	      stmt.setString(5, p.getCodigo_produto());
 	     
 	      stmt.executeUpdate();
 	    } catch (SQLException ex) {
@@ -105,14 +99,14 @@ public class ProdutoRepository{
 	    Connection con = ConnectionBancoDados.obterConexao();
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
-	    int produto_id = 0;
+	    int id_produto = -1;
 
 	    try {
 	      stmt = con.prepareStatement("SELECT MAX(id_produto) as id_produto FROM table_Produtos;");
 	      rs = stmt.executeQuery();
 
 	      while (rs.next()) {
-	        produto_id = rs.getInt("id_produto");
+	        id_produto = rs.getInt("id_produto");
 
 	      }
 	    } catch (SQLException ex) {
@@ -120,7 +114,7 @@ public class ProdutoRepository{
 	    } finally {
 	    	ConnectionBancoDados.fecharConexao(con, stmt, rs);
 	    }
-	    return produto_id;
+	    return id_produto;
 	  }
 
 	  public table_Produtos getProdutos(int id_produto) {
@@ -139,9 +133,6 @@ public class ProdutoRepository{
 	        p.setPreco_custo(rs.getDouble("preco_custo"));
 	        p.setPreco_venda(rs.getDouble("preco_venda"));	        
 	        p.setQuantidade(rs.getInt("quantidade"));
-	        p.setEndereco_imagem2(rs.getString("endereco_imagem2"));
-	        p.setEndereco_imagem3(rs.getString("endereco_imagem3"));
-	        p.setEndereco_imagem(rs.getString("endereco_imagem"));
 	        p.setCodigo_produto(rs.getString("codigo_produto"));
 
 	    } catch (SQLException ex) {
@@ -157,17 +148,14 @@ public class ProdutoRepository{
 	    PreparedStatement stmt = null;
 
 	    try {
-	      stmt = con.prepareStatement("update table_Produtos set descricao = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, endereco_imagem = ?, endereco_imagem2 = ?, endereco_imagem3 = ?, codigo_produto = ? where id_produto = ?;");
+	      stmt = con.prepareStatement("update table_Produtos set descricao = ?, preco_custo = ?, preco_venda = ?, quantidade = ?, codigo_produto = ? where id_produto = ?;");
 	      
 	      stmt.setString(1, p.getDescricao());
 	      stmt.setDouble(2, p.getPreco_custo());
 	      stmt.setDouble(3, p.getPreco_venda());
 	      stmt.setInt(4, p.getQuantidade());
-	      stmt.setString(5, p.getEndereco_imagem2());
-	      stmt.setString(6, p.getEndereco_imagem3());
-	      stmt.setString(7, p.getEndereco_imagem());
-	      stmt.setString(8, p.getCodigo_produto());
-	      stmt.setInt(9, p.getId_produto());
+	      stmt.setString(5, p.getCodigo_produto());
+	      stmt.setInt(6, p.getId_produto());
 	      
 	      stmt.executeUpdate();
 	    } catch (SQLException ex) {

@@ -1,129 +1,39 @@
-$(document).ready(function() {
-        $('#cadProdutos').submit(function(){                    
-            $.post('../produtos',
-            		$('#cadProdutos input'),
-            		function(retorno){                        
-                alert("Produto cadastrado com sucesso");
-                location.reload(true);
-            }, 'html'); 
-            
-            return false;
-            
-        });
-	
-	//futuras implementações
-    $('#contact_form').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        }
-        })
-        .on('success.form.bv', function(e) {
-            $('#success_message').slideDown({ opacity: "show" }, "slow") 
-                $('#contact_form').data('bootstrapValidator').resetForm();
+function addImage() {
+  let url = document.getElementById('endereco_imagem').value;
+  let lista = document.getElementById('lista-imagens');
+  
+  let s = `<li class="list-group-item d-flex justify-content-between align-items-center" style="overflow: auto">`
+                +url+
+                `<input name="imagem" type="hidden" value="` + url + `"><button type="button" class="btn btn-danger sm" onclick="$(this).closest('li').remove();">Remover</button>
+              </li>`;
 
-            // Prevent form submission
-            e.preventDefault();
-
-            // Get the form instance
-            var $form = $(e.target);
-
-            // Get the BootstrapValidator instance
-            var bv = $form.data('bootstrapValidator');
-
-            // Use Ajax to submit form data
-            $.post($form.attr('action'), $form.serialize(), function(result) {
-                console.log(result);
-            }, 'json');
-        });
-});
-
-function getProdutos(){
-	$.ajax({
-		  url: "../produtos",
-		  cache: false
-		  
-	})
-		  .done(function( resultado ) {
-		  console.log(">>>>>>>>>>>>>>>>>" + JSON.stringify(resultado));
-		  
-		   $('#myTable tbody').empty();	  
-		   	
-			  for(var i = 0 ; i< resultado.length ; i++){			  
-				  $( '#myTable > tbody:last-child' ).append( 
-				  "<tr>" +
-				  "	<td><div id=\"id_produto\">"+resultado[i].codigo_produto+"</div></td>" +
-				  " <td><div id=\"descricao\">" +resultado[i].descricao+"</div></td> " +
-				  " <td><div id=\"custo\">" +resultado[i].preco_venda+"</div></td> " +
-				  " <td><div id=\"preco\">" +resultado[i].preco_custo+"</div></td> " +
-				  " <td><div id=\"quantidade\">" +resultado[i].quantidade+"</div></td> " +
-				  
-				  " <td onclick=\"deleteProduto("+resultado[i].id_produto+")\"><div id=\"delete\"> Inativar </div></td> " +
-				  
-				  " <td onclick=\"ajaxGet("+resultado[i].id_produto+")\"><div id=\"editar\"> Editar </div></td> " +
-				  				  
-				  
-				  "</tr>" );
-			  }
-			 
-			  
-		  });
-	
+  lista.insertAdjacentHTML("beforeend", s);
+  
+  document.getElementById('endereco_imagem').value='';
+  
 }
 
+function addPR() {
+  let pergunta = document.getElementById('pergunta').value;
+  let resposta = document.getElementById('resposta').value;
+  let lista = document.getElementById('lista-pr');
+  
+  let s = `<li class="list-group-item d-flex justify-content-between align-items-center" style="padding-left: 0px">
+                <div>
+                  <p class="font-weight-normal">` + pergunta + `</p>
+                  <input name="pergunta" type="hidden" value="` + pergunta + `">
+                  <p class="font-weight-light" name="resposta">` + resposta + `</p>
+                  <input name="resposta" type="hidden" value="` + resposta + `">
+                </div>
+                <button type="button" class="btn btn-danger sm" onclick="$(this).closest('li').remove();">Remover</button>
+              </li>`;
 
-
-function deleteProduto(idd){
-
-	console.log("!!!!!!!!!" + idd);
-	
-	$.ajax({
-    type : "DELETE",
-    url : "../produtos/" + idd,
-    success: function (result) {       
-           getProdutos();                
-    alert("Item inativado");  
-    },
-    error: function (e) {
-        console.log(e);
-    
-    }
-	});
+  lista.insertAdjacentHTML("beforeend", s);
+  
+  document.getElementById('pergunta').value='';
+   document.getElementById('resposta').value='';
 }
 
-
-function ajaxGet(idd){
-    $.ajax({
-      type : "GET",
-      url : "../produtos/" + idd,
-      success: function(result){
-        if(result){
-          
-              $("#id_produto").val(result.id_produto);
-              $("#descricao").val(result.descricao);
-              $("#codigo_produto").val(result.codigo_produto);
-              $("#preco_custo").val(result.preco_custo);
-              $("#preco_venda").val(result.preco_venda);
-              $("#quantidade").val(result.quantidade);
-              $("#endereco_imagem").val(result.endereco_imagem);
-          
-        }else{
-                   console.log("else Success: ", result);
-                            
-        }
-      },
-      error : function(e) {
-        console.log("ERROR: ", e);
-      }
-    });  
-  }
-
-
-
-
-
-
-
-
+function visualizarProduto(){
+  
+}
